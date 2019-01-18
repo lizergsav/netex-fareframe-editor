@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div th:replace="template.html :: header"></div>
+	
+<table class="table table-bordered table-responsive-md table-striped text-center">
+	<thead>
+	    <tr>
+	      <th scope="col">Id</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Version</th>
+	      <th scope="col">PrivateCode</th>
+	      <th scope="col">Description</th>
+	      <th scope="col"></th>
+	    </tr>
+	  </thead>
+	<tbody>
+		<tr th:each="typeOfTravelDocument : ${typeOfTravelDocuments}">
+       		<th scope="row" th:text="*{typeOfTravelDocument.id}"/>
+       		<td th:text="*{typeOfTravelDocument.name}"/>
+       		 <td th:text="*{typeOfTravelDocument.version}"/>
+       		 <td th:text="*{typeOfTravelDocument.privateCode}"/>
+       		 <td th:text="*{typeOfTravelDocument.description}"/>
+       		 <td>
+       		 <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+       		 <a href="edit.html"
+               th:href="@{/modifyTypeOfTravelDocument(id = ${typeOfTravelDocument.id},version=${typeOfTravelDocument.version})}"
+               class="btn btn-default">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </a>
+       		 </td>
+       		 <br>
+		</tr>
+	</tbody>
+</table>
+<br>
+
+<br>
+<a th:href="@{/newTypeOfTravelDocument.html}">New typeOfTravelDocument</a>
+
+</body>
+</html>
