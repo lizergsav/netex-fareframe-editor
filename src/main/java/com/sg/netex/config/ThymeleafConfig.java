@@ -1,4 +1,4 @@
-package com.example.netex.config;
+package com.sg.netex.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

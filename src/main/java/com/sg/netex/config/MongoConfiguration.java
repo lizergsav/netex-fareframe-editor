@@ -1,4 +1,4 @@
-package com.example.netex.config;
+package com.sg.netex.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;

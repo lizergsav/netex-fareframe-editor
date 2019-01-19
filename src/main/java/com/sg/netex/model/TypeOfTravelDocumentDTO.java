@@ -1,4 +1,4 @@
-package com.example.netex.model;
+package com.sg.netex.model;
 
 import org.rutebanken.netex.model.TypeOfTravelDocument;
 import org.springframework.data.annotation.Id;

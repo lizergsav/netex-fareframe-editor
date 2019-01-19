@@ -1,4 +1,4 @@
-package com.example.netex.controller;
+package com.sg.netex.controller;
 
 import java.util.Date;
 

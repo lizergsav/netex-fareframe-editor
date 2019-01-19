@@ -1,4 +1,4 @@
-package com.example.netex.controller;
+package com.sg.netex.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.netex.model.TypeOfTravelDocumentDTO;
-import com.example.netex.repository.TypeOfTravelDocumentRepository;
+import com.sg.netex.model.TypeOfTravelDocumentDTO;
+import com.sg.netex.repository.TypeOfTravelDocumentRepository;
 
 @Controller
 public class ResourceFrameController {
