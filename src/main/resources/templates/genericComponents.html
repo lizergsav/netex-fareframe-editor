@@ -1,0 +1,28 @@
+<div th:fragment="action">
+<script type="text/javascript" th:inline="javascript">
+$(document).ready(function() {
+	var $form = $('#submitForm');
+	  $form.on('#submitForm', function(e) {
+		  console.log("form submit")
+	    e.preventDefault();
+		
+	    $.post({
+	      url: '/manage'+[[${fareType}]],
+	      data: $form.serialize(),
+	      success: function(response) {
+	        // if the response contains any errors, replace the form
+	        if ($(response).find('.has-error').length) {
+	          $form.replaceWith(response);
+	        } else {
+		    	var link = '/'+[[${fareType}]];
+
+	    		$.ajax({url: link, success: function(result){
+    			    $("#main").html(result);
+
+    		 	}});
+	        }
+	      }
+	  });
+	});
+});</script>
+</div>

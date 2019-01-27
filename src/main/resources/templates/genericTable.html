@@ -1,0 +1,77 @@
+<div id="grid" th:fragment="grid">	
+		<div id="toolbar">
+			<button type="button" id="newItem" class="btn btn-secondary">New</button>
+			<button type="button" id="modify" class="btn btn-secondary">Modify</button>
+			<button type="button" id="delete" class="btn btn-secondary">Delete</button>
+		</div>
+					
+		<table    th:if="${tableItems.size() > 0}"
+				  id="table"
+				  data-toolbar="#toolbar"
+				  data-search="true"
+				  data-show-refresh="true"
+				  data-show-toggle="true"
+				  data-show-columns="true"
+				  data-detail-view="true"
+				  data-detail-formatter="detailFormatter"
+				  data-minimum-count-columns="2"
+				  data-show-pagination-switch="true"
+				  data-pagination="true"
+				  data-id-field="id"
+				  data-page-list="[10, 25, 50, 100, ALL]"
+				  data-show-footer="false"
+				  data-side-pagination="client"
+				  
+				  data-click-to-select="true"
+				  >
+				  <thead>
+				    <tr>
+				      <th data-field="state" data-checkbox="true"></th>
+				      <th data-field="mongoId" >Mongo Id</th>
+				      <th data-field="name">Item Name</th>
+				      <th data-field="version">Version</th>
+				      <th data-field="privateCode">Private Code</th>
+				      <th data-field="description">Description</th>
+				      <th data-field="objectType">ObjectType</th>
+				      <th data-field="fareFrameType">FareFrameType</th>
+				    </tr>
+				  </thead>
+				  </table>
+		<br>
+		
+		
+		<script th:inline="javascript">
+		$(document).ready(function() {
+			
+			var data = [[${tableItems}]];
+			
+			console.log("log data");
+			console.log(data);
+			
+			$('#table').bootstrapTable({
+			  data: data,
+			  pagination: true
+			});
+			
+			$('#newItem').click(function(){
+				var url = [[${action.modifyItemUrl}]]
+				$('#main').load(url);
+				console.log(url);
+				
+			});
+			
+			$('#modify').click(function(){
+				var param = $('#table').bootstrapTable('getSelections');
+				if (param.length == 1){
+					var url = [[${action.modifyItemUrl}]]+'?mongoId='+param[0].mongoId;
+					$("#main").load(url);	
+				}
+				
+				console.log(param);
+	    		
+			});
+			
+			
+		});
+		</script>
+	</div>

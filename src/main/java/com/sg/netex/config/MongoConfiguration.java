@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.mongodb.MongoClient;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.example.netex.repository")
+@EnableMongoRepositories(basePackages = "com.sg.netex.repository")
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
 	@Override
