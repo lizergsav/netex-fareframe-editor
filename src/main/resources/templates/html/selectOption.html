@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="option(fieldName,label, enum)">
+		<tr>
+			<td><label th:text="${label}"></label></td>
+		<td>
+			<select th:field="*{__${fieldName}__}">
+			    <option th:each="state : ${@helper.getEnumValues(enum) }"
+			            th:value="${state}" th:selected="${state == fieldName}"
+			            th:text="${state}">
+			    </option>
+			</select>
+		</td>
+		</tr>
+	</div>
+</body>
+</html>

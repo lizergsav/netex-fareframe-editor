@@ -1,37 +1,31 @@
 	<div id="edit" th:fragment="edit">
-		<form id="submitForm" action="" th:action="@{/saveTypeOfTravelDocument}" method="POST" th:object="${item}" 7>
+		<form id="submitForm" action="" th:action="@{/saveTypeOfTravelDocument}" method="POST" th:object="${item}">
 		<table name="submitForm"  class="table table-bordered" align="center">
 			<tbody>
-				<tr>
-					<td>Id</td>
-					<td ><input class="form-control" th:field="${item.typeOfTravelDocument.id}" type="text" value="${item.typeOfTravelDocument.id}" required/></td>
-				</tr>
-				<tr>
-					<td>Name</td>
-					<td><input class="form-control" th:field="${item.typeOfTravelDocument.name.value}" type="text" value="${item.typeOfTravelDocument.name.value}" required/>
-					<select th:field="${item.typeOfTravelDocument.name.lang}"> 
-						<option  th:value="HU" selected="selected">HU</option>
-						<option th:value="EN">EN</option>
-					</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Version</td>
-					<td><input class="form-control" th:field="${item.typeOfTravelDocument.version}" type="text" value="${item.typeOfTravelDocument.version}" required/></td>
-				</tr>
-				<tr>
-					<td>PrivateCode</td>
-					<td><input class="form-control" th:field="${item.typeOfTravelDocument.privateCode.value}" type="text" value="${item.typeOfTravelDocument.privateCode.value}" required/></td>
-				</tr>
-				<tr>
-					<td>Description</td>
-					<td><input class="form-control" th:field="${item.typeOfTravelDocument.description.value}" type="text" value="${item.typeOfTravelDocument.description.value}"/>
-					<select th:field="${item.typeOfTravelDocument.description.lang}"> 
-						<option  th:value="HU" selected="selected">HU</option>
-						<option th:value="EN">EN</option>
-					</select>
-					</td>
-				</tr>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('typeOfTravelDocument.id','item.typeOfTravelDocument.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfTravelDocument.name.value','item.typeOfTravelDocument.name.value','typeOfTravelDocument.name.lang','Name','true')"></div>
+				<!-- ShortName -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfTravelDocument.shortName.value','item.typeOfTravelDocument.shortName.value','typeOfTravelDocument.shortName.lang','Short Name','false')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('typeOfTravelDocument.version','item.typeOfTravelDocument.version','Version','true')"></div>
+				<!-- PrivateCode -->
+				<div th:replace="/html/privateCode :: privateCode(	'typeOfTravelDocument.privateCode.value',
+																	'item.typeOfTravelDocument.privateCode.value',
+																	'typeOfTravelDocument.privateCode.type',
+																	'item.typeOfTravelDocument.privateCode.type',
+																	'Private code','true')"></div>
+				<!-- hasPhoto 
+				<div th:replace="/html/boolean :: boolean('typeOfTravelDocument.hasPhoto','Has Photo')"></div>
+				-->
+				
+				<!-- Description -->
+				<div th:replace="/html/textareaMulti :: textareaMulti('typeOfTravelDocument.description.value','item.typeOfTravelDocument.description.value','Description','typeOfTravelDocument.description.lang')"></div>
+				
+				<!-- MachineReadable -->
+				<div th:replace="/html/selectOption :: option('typeOfTravelDocument.machineReadable','MachineReadable','MachineReadableEnumeration')"/>
+				
 				<tr>
 					<td><input type="submit" value="Submit" /></td>
 				</tr>

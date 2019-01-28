@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>	
+	<div th:fragment="textareaMulti(fieldName,fieldValue,label,fieldNameLang)">
+		<tr>
+			<td><label th:text="${label}"></label></td>
+			<td > <textarea class="form-control" th:field="*{__${fieldName}__}" rows="5" cols="3"><span th:text="*{__${fieldValue}__}"> </span> </textarea>
+			<select th:field="*{__${fieldNameLang}__}">
+			    <option th:value="hu" th:selected="${'hu' == fieldNameLang}">HU</option>
+			    <option th:value="en" th:selected="${'en' == fieldNameLang}">EN</option>
+			</select>
+			
+			</td>
+		</tr> 
+	</div>
+
+</body>
+</html>

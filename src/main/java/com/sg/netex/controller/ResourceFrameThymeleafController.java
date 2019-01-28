@@ -61,7 +61,7 @@ public class ResourceFrameThymeleafController {
         model.addAttribute("action", action);
         
         
-        return "genericTable.html :: grid";
+        return "/html/genericTable.html :: grid";
     }
 	
 	@RequestMapping(value = "/manageTypeOfTravelDocument", method = RequestMethod.GET)

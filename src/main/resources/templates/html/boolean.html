@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="boolean(fieldName,label)">
+		<tr>
+			<td><label th:text="${label}"></label></td>
+			<td >
+				<select th:field="*{__${fieldName}__}">
+				    <option th:value="true" th:selected="${@helper.getBooleanValue(fieldName)">true</option>
+				    <option th:value="false" th:selected="${@helper.getBooleanValue(fieldName)}">false</option>
+				</select>
+			</td>
+		</tr> 
+	</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="privateCode(fieldName,fieldValue,fieldType, fieldTypeValue,label,required)">
+		<tr>
+			<td><label th:text="${label}"></label></td>
+			<td ><input class="form-control" th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" th:required="${required=='true'}"/>
+			<td ><input class="form-control" th:field="*{__${fieldType}__}" type="text" value="*{__${fieldTypeValue}__}" th:required="${required=='true'}"/>
+			</td>
+		</tr> 
+	</div>
+</body>
+</html>

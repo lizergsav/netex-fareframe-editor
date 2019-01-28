@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:fragment="inputMulti(fieldName,fieldValue,fieldNameLang,label,required)">
+	<tr>
+		<td><label th:text="${label}"></label></td>
+		<td ><input class="form-control" th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" th:required="${required=='true'}"/>
+	
+			<select th:field="*{__${fieldNameLang}__}">
+			    <option th:value="hu" th:selected="${'hu' == fieldNameLang}">HU</option>
+			    <option th:value="en" th:selected="${'en' == fieldNameLang}">EN</option>
+			</select>
+		</td>
+	</tr>
+</div>
+
+</body>
+</html>
