@@ -13,7 +13,9 @@ public class BaseDTO extends EntityInVersionStructure{
 		
 	private FareFrameType fareFrameType;
 	
-	private String objectType;
+	private String operator;
+	
+	private String name;
 	
 	public String getMongoId() {
 		return mongoId;
@@ -31,11 +33,21 @@ public class BaseDTO extends EntityInVersionStructure{
 		this.fareFrameType = fareFrameType;
 	}
 
-	public String getObjectType() {
-		return objectType;
+	public String getOperator() {
+		return operator;
 	}
 
-	public void setObjectType(String objectType) {
-		this.objectType = objectType;
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 }

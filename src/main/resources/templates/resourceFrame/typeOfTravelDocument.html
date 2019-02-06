@@ -24,8 +24,11 @@
 				<div th:replace="/html/textareaMulti :: textareaMulti('typeOfTravelDocument.description.value','item.typeOfTravelDocument.description.value','Description','typeOfTravelDocument.description.lang')"></div>
 				
 				<!-- MachineReadable -->
-				<div th:replace="/html/selectOption :: option('typeOfTravelDocument.machineReadable','MachineReadable','MachineReadableEnumeration')"/>
+				<div th:replace="/html/selectOptionEnum :: option('typeOfTravelDocument.machineReadable','MachineReadable','MachineReadableEnumeration')"/>
 				
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
 				<tr>
 					<td><input type="submit" value="Submit" /></td>
 				</tr>

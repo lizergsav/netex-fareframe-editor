@@ -30,8 +30,37 @@ public class Helper {
 		return result;
 	}
 	
+	public static String getEnumValue(String enumName,String value) {
+		
+		Class<?> clz;
+		try {
+			
+			if (enumName.contains("."))
+				clz = Class.forName(enumName);
+			else
+				clz = Class.forName("org.rutebanken.netex.model.".concat(enumName));
+			
+			for (Object item: clz.getEnumConstants()) {
+				if (item.toString().equals(value))
+					return item.toString();
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+	
 	public static Boolean getBooleanValue(Boolean value) {
 		return value;
+	}
+	
+	public static String replaceDot(String input) {
+		
+		return input.replaceAll("\\.", "_");
 	}
 	
 }

@@ -34,18 +34,21 @@ public class ResourceFrameThymeleafController {
     public String typeOfTravelDocument(Model model) {
 		
 		List<TypeOfTravelDocumentDTO> typeOfTravelDocuments = typeOfTravelDocumentRepo.findAll();
-    	List<GenericTable> tableItems = new ArrayList<>();
+    	
+		List<GenericTable> tableItems = new ArrayList<>();
 		
 		for (TypeOfTravelDocumentDTO list : typeOfTravelDocuments) {
 			GenericTable item = new GenericTable();
 			if (list.getTypeOfTravelDocument().getDescription() != null)
 				item.setDescription(list.getTypeOfTravelDocument().getDescription().getValue());
 			item.setFareFrameType(list.getFareFrameType());
+			if (list.getName() != null)
+				item.setName(list.getName());
 			item.setMongoId(list.getMongoId());
 			if (list.getTypeOfTravelDocument().getName() != null)
 				item.setName(list.getTypeOfTravelDocument().getName().getValue());
-			if (list.getObjectType() != null)
-				item.setObjectType(list.getObjectType());
+			if (list.getOperator() != null)
+				item.setObjectType(list.getOperator());
 			if (list.getTypeOfTravelDocument().getPrivateCode()!= null)
 				item.setPrivateCode(list.getTypeOfTravelDocument().getPrivateCode().getValue());
 			item.setVersion(list.getTypeOfTravelDocument().getVersion());

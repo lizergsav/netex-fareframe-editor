@@ -5,18 +5,47 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div th:fragment="option(fieldName,label, enum)">
+	<div th:fragment="option(fieldName,label,fieldValue,service)">
 		<tr>
 			<td><label th:text="${label}"></label></td>
 		<td>
-			<select th:field="*{__${fieldName}__}">
-			    <option th:each="state : ${@helper.getEnumValues(enum) }"
-			            th:value="${state}" th:selected="${state == fieldName}"
-			            th:text="${state}">
-			    </option>
+			<param th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" readonly />
+			<select class="selectpicker" th:id="${@helper.replaceDot(fieldName) }">
+			    
 			</select>
 		</td>
 		</tr>
+		<script th:inline="javascript">
+		$(document).ready(function() {
+			
+			var name = [[${fieldName}]];
+			var local = $("input[type=text][name="+name+"]").val();
+			console.log("local: "+local)
+			
+			$('.selectpicker').change(function(){
+				var end = this.value;
+				$("input[type=text][name="+name+"]").val(end);
+			});
+			
+			 $.ajax({url: [[${service}]], 
+				 	success: function(result){
+				    	var field = [[${fieldValue}]]
+				    	console.log(field);
+				    	if (result != null && result.length > 0){
+							 for (i = 0; i < result.length;i++ ){
+									$('.selectpicker').append($("<option/>").attr("value",result[i].id).text(result[i].name));
+								}
+							 $('.selectpicker').val(local);
+						 } else {
+							 $('.selectpicker').val();
+						 }
+					}
+			 });			
+			
+		});
+		</script>
+		
+		
 	</div>
 </body>
 </html>
