@@ -24,6 +24,9 @@
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resource</a>
 				  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#typeOfTravelDocument" id="typeOfTravelDocument">TypeOfTravelDocument</a>
+					<a class="dropdown-item" href="#typeOfService" id="typeOfService">TypeOfServices</a>
+					<a class="dropdown-item" href="#typeOfProductCategory" id="typeOfProductCategory">TypeOfProductCategories</a>
+					
 				  </div>
 				  
 				  </li>
@@ -54,16 +57,35 @@
 			
 			<script type="text/javascript">
 			$(document).ready(function() {
-						var url = '/typeOfTravelDocument';
-						
 						$('a[href="#typeOfTravelDocument"]').click(function(){
 							
+							var url = '/typeOfTravelDocument';
 							event.preventDefault();
 							$.ajax({url: url, success: function(result){
 									$("#main").html(result);
 		   
 							 }});		    	
-						});								
+						});
+						$('a[href="#typeOfService"]').click(function(){
+							
+							var url = '/typeOfService';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						$('a[href="#typeOfProductCategory"]').click(function(){
+							
+							var url = '/typeOfProductCategory';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+						
 			});
 			</script>
 		

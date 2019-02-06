@@ -8,8 +8,8 @@
 	<div th:fragment="privateCode(fieldName,fieldValue,fieldType, fieldTypeValue,label,required)">
 		<tr>
 			<td><label th:text="${label}"></label></td>
-			<td ><input class="form-control" th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" th:required="${required=='true'}"/>
-			<td ><input class="form-control" th:field="*{__${fieldType}__}" type="text" value="*{__${fieldTypeValue}__}" th:required="${required=='true'}"/>
+			<td ><input class="form-control" th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" th:required="${required=='true'}" placeholder="value"/>
+			<td ><input class="form-control" th:field="*{__${fieldType}__}" type="text" value="*{__${fieldTypeValue}__}" th:required="${required=='true'}" placeholder="type"/>
 			</td>
 		</tr> 
 	</div>

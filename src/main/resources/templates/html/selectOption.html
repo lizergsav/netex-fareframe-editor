@@ -9,7 +9,7 @@
 		<tr>
 			<td><label th:text="${label}"></label></td>
 		<td>
-			<param th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" readonly />
+			<input th:field="*{__${fieldName}__}" type="text" value="*{__${fieldValue}__}" readonly />
 			<select class="selectpicker" th:id="${@helper.replaceDot(fieldName) }">
 			    
 			</select>

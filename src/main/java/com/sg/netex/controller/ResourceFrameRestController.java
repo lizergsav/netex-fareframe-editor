@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sg.netex.dto.BaseDTO;
+import com.sg.netex.dto.TypeOfProductCategoryDTO;
+import com.sg.netex.dto.TypeOfServiceDTO;
 import com.sg.netex.dto.TypeOfTravelDocumentDTO;
 import com.sg.netex.repository.BaseDTORepository;
+import com.sg.netex.repository.TypeOfProductCategoryRepository;
+import com.sg.netex.repository.TypeOfServiceRepository;
 import com.sg.netex.repository.TypeOfTravelDocumentRepository;
 
 @Controller
@@ -20,6 +24,12 @@ public class ResourceFrameRestController {
 
 	@Autowired
 	TypeOfTravelDocumentRepository typeOfTravelDocumentRepo;
+	
+	@Autowired
+	TypeOfServiceRepository typeOfServiceRepository; 
+	
+	@Autowired
+	TypeOfProductCategoryRepository typeOfProductCategoryRepository; 
 	
 	@Autowired
 	BaseDTORepository baseRepo;
@@ -30,6 +40,20 @@ public class ResourceFrameRestController {
     	List<TypeOfTravelDocumentDTO> typeOfTravelDocuments = typeOfTravelDocumentRepo.findAll();
     	
         return new ResponseEntity<>(typeOfTravelDocuments,HttpStatus.OK);
+    }
+
+	@RequestMapping(value = "/typeOfservices", method = RequestMethod.GET)
+    public ResponseEntity<List<TypeOfServiceDTO>> typeOfservices(Model model) {
+    	List<TypeOfServiceDTO> typeOfTravelDocuments = typeOfServiceRepository.findAll();
+    	
+        return new ResponseEntity<>(typeOfTravelDocuments,HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "/typeOfProductCategories", method = RequestMethod.GET)
+    public ResponseEntity<List<TypeOfProductCategoryDTO>> typeOfProductCategory(Model model) {
+    	List<TypeOfProductCategoryDTO> items = typeOfProductCategoryRepository.findAll();
+    	
+        return new ResponseEntity<>(items,HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "/BaseInfo", method = RequestMethod.GET)
