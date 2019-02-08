@@ -1,0 +1,185 @@
+<html>
+<head>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link href="https://unpkg.com/bootstrap-table@1.13.2/dist/bootstrap-table.min.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>		
+</head>
+<body>
+<div id="grid" >	
+		<div id="toolbar">
+			<button type="button" id="newItem" class="btn btn-secondary">New</button>
+			<button type="button" id="modify" class="btn btn-secondary">Modify</button>
+			<button type="button" id="delete" class="btn btn-secondary">Delete</button>
+		</div>
+					
+		<table    
+				  id="table"
+				  data-toolbar="#toolbar"
+				  data-search="true"
+				  data-url="/typeOfTravelDocuments"
+				  data-show-refresh="true"
+				  data-show-toggle="true"
+				  data-show-columns="true"
+				  data-detail-view="true"
+				  data-detail-formatter="detailFormatter"
+				  data-minimum-count-columns="2"
+				  data-show-pagination-switch="true"
+				  data-pagination="true"
+				  data-id-field="mongoId"
+				  data-page-list="[10, 25, 50, 100, ALL]"
+				  data-show-footer="false"
+				  data-side-pagination="client"
+				  
+				  data-click-to-select="true"
+				  >
+				  <thead>
+				    <tr>
+				      <th data-field="state" data-checkbox="true"></th>
+				      <th data-field="mongoId" >Mongo Id</th>
+				      <th data-field="typeOfTravelDocument.name.value">Item Name</th>
+				      <th data-field="typeOfTravelDocument.version">Version</th>
+				      <th data-field="typeOfTravelDocument.privateCode.value">Private Code</th>
+				      <th data-field="typeOfTravelDocument.description.value">Description</th>
+				      <th data-field="objectType">ObjectType</th>
+				      <th data-field="fareFrameType">FareFrameType</th>
+				    </tr>
+				  </thead>
+				  </table>
+		<br>
+
+			<!-- Optional JavaScript -->
+			<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+			<script src="https://unpkg.com/bootstrap-table@1.13.2/dist/bootstrap-table.min.js"></script>
+			<!-- Extensions -->	
+			<script src="https://unpkg.com/bootstrap-table@1.13.2/dist/extensions/editable/bootstrap-table-editable.js"></script>
+			<script src="https://unpkg.com/bootstrap-table@1.13.2/dist/extensions/export/bootstrap-table-export.js"></script>
+		
+		
+		<script type="text/javascript">
+		$(document).ready(function() {
+			var $table = $('#table');
+			var dataTable;
+			
+			$.ajax({
+					  url: '/typeOfTravelDocuments',
+					  type: 'GET',
+					  success: function(data){
+							dataTable = data;
+							$table.bootstrapTable('load',data);
+							$table.bootstrapTable('refresh')
+							console.log(dataTable);
+					  }
+					 });
+			
+			$('#table').bootstrapTable({
+			  data: dataTable,
+			  pagination: true
+			});
+			
+			
+			$('#newItem').click(function(){
+				$("#grid").hide();
+				$("#edit").show();
+				
+			});
+
+			
+			$('#modify').click(function(){
+				var tmp = $table.bootstrapTable('getSelections');
+				if (tmp.length == 1){
+					$("#grid").hide();
+					$("#edit").show();
+					console.log(tmp[0].typeOfTravelDocument.name.value);
+					
+					$("#mongoId").val(tmp[0].mongoId);
+					$("#typeOfTravelDocument_name_value").val(tmp[0].typeOfTravelDocument.name.value);
+					$("#typeOfTravelDocument_version").val(tmp[0].typeOfTravelDocument.version);
+					$("#typeOfTravelDocument_privateCode_value").val(tmp[0].typeOfTravelDocument.privateCode.value);
+					
+					if (typeOfTravelDocument.shortName != null )
+						$("#typeOfTravelDocument_shortName_value").val(tmp[0].typeOfTravelDocument.shortName.value);
+				}
+				
+			});
+			
+			$('#cancel').click(function(){
+				$("#grid").show();
+				$("#edit").hide();
+				
+			});
+			
+			$('#save').click(function(e){
+				e.preventDefault();
+				
+				var data = JSON.stringify($('#submitForm').serializeArray());
+				
+				console.log("meghivva");
+				console.log(data);
+				
+				$.ajax({
+					  url: '/typeOfTravelDocument',
+					  contentType: 'application/json',
+					  dataType: 'json',
+					  data: data,
+					  success: function(data){
+							console.log("sikeres Mentes");
+					  },
+					  processData: false,
+					  type: 'POST'
+					 });
+
+				
+				$("#grid").show();
+				$("#edit").hide();
+				
+			});
+			
+		});
+		</script>
+	</div>
+	
+<div id="edit" style="display: none"> 
+		<form id="submitForm" action="/typeOfTravelDocument" method="post">
+		<table name="tblSubmitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<tr>
+					<td>Id</td>
+					<td><input class="form-control" id="id" /></td>
+				</tr>			
+				<tr>
+					<td>Name</td>
+					<td><input class="form-control" id="typeOfTravelDocument_name_value" name="typeOfTravelDocument.name.value" required/></td>
+				</tr>			
+				<tr>
+					<td>Version</td>
+					<td><input class="form-control" id="typeOfTravelDocument_version" name="typeOfTravelDocument.version" required/></td>
+				</tr>			
+				<tr>
+					<td>Private Code</td>
+					<td><input class="form-control" id="typeOfTravelDocument_privateCode_value" name="typeOfTravelDocument.privateCode.value" reqired/></td>
+				</tr>			
+				<tr>
+					<td>Short name</td>
+					<td><input class="form-control" id="typeOfTravelDocument_shortName_value" name="typeOfTravelDocument.shortName.value" /></td>
+				</tr>
+
+
+
+			</tbody>
+		</table>
+			<button type="button"  id="save" class="btn btn-secondary">Save</button>
+			<button type="button" id="cancel" class="btn btn-secondary">Cancel</button>
+			
+		</form>
+		
+
+
+</div>
+
+
+</body>
+</html>
