@@ -107,7 +107,7 @@ public class TypeOfServiceController {
 		
 		typeOfServiceRepository.save(input);
 		
-		return "index.html";
+		return "html/modified";
     }
 	
 	@RequestMapping(value = "/typeOfService", method = RequestMethod.DELETE)

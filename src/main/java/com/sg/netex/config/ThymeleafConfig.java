@@ -10,11 +10,13 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring5.ISpringTemplateEngine;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
@@ -61,6 +63,24 @@ public class ThymeleafConfig implements ApplicationContextAware,WebMvcConfigurer
 	  	messageSource.setDefaultEncoding("UTF8");
 	  	return messageSource;
 	  }
+
+	  @Bean(name = "textTemplateEngine")
+	    public TemplateEngine textTemplateEngine() {
+	        TemplateEngine templateEngine = new TemplateEngine();
+	        templateEngine.addTemplateResolver(textTemplateResolver());
+	        return templateEngine;
+	    }
+
+	    private ITemplateResolver textTemplateResolver() {
+	        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+	        templateResolver.setPrefix("/templates/text/");
+	        templateResolver.setSuffix(".java");
+	        templateResolver.setTemplateMode(TemplateMode.TEXT);
+	        templateResolver.setCharacterEncoding("UTF8");
+	        templateResolver.setCheckExistence(true);
+	        templateResolver.setCacheable(false);
+	        return templateResolver;
+	    }
 	  
 }
 

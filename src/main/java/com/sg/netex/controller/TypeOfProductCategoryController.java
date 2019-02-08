@@ -108,7 +108,7 @@ public class TypeOfProductCategoryController {
 		
 		typeOfProductCategoryRepository.save(input);
 		
-		return "index.html";
+		return "html/modified";
     }
 
 	@RequestMapping(value = "/typeOfProductCategory", method = RequestMethod.DELETE)

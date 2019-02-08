@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class HelperTest {
 	
-	@Test
+	@Test()
 	public void testGetEnumValues() throws ClassNotFoundException {
 		
 		//Class<?> clz = Class.forName("org.rutebanken.netex.model.MachineReadableEnumeration");
