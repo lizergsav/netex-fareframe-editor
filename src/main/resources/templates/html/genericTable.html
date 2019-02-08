@@ -55,21 +55,46 @@
 			
 			$('#newItem').click(function(){
 				var url = [[${action.modifyItemUrl}]]
-				$('#main').load(url);
+				$.ajax({url: url, 
+						method: 'GET',
+						success: function(result){
+						$("#main").html(result);
+
+			 	}});		
+				
 				console.log(url);
 				
 			});
+			
 			
 			$('#modify').click(function(){
 				var param = $('#table').bootstrapTable('getSelections');
 				if (param.length == 1){
 					var url = [[${action.modifyItemUrl}]]+'?mongoId='+param[0].mongoId;
-					$("#main").load(url);	
+					$.ajax({url: url, 
+						method: 'GET',
+						success: function(result){
+						$("#main").html(result);
+
+			 	}});		
 				}
 				
 				console.log(param);
-	    		
 			});
+			
+			$('#delete').click(function(){
+				var param = $('#table').bootstrapTable('getSelections');
+				if (param.length == 1){
+					var url = [[${action.deleteItemUrl}]]+'?mongoId='+param[0].mongoId;
+					console.log(url);
+					$.ajax({url: url, 
+							method: 'DELETE',
+							success: function(result){
+							$("#main").html(result);
+	
+				 	}});	
+				}
+			});			
 			
 			
 		});

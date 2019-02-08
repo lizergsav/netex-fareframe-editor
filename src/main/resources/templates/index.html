@@ -59,16 +59,18 @@
 			$(document).ready(function() {
 						$('a[href="#typeOfTravelDocument"]').click(function(){
 							
-							var url = '/typeOfTravelDocument';
+							var url = '/typeOfTravelDocumentGrid';
 							event.preventDefault();
-							$.ajax({url: url, success: function(result){
+							$.ajax({url: url, 
+									method: 'GET',
+									success: function(result){
 									$("#main").html(result);
 		   
 							 }});		    	
 						});
 						$('a[href="#typeOfService"]').click(function(){
 							
-							var url = '/typeOfService';
+							var url = '/typeOfServiceGrid';
 							event.preventDefault();
 							$.ajax({url: url, success: function(result){
 									$("#main").html(result);
@@ -77,7 +79,7 @@
 						});
 						$('a[href="#typeOfProductCategory"]').click(function(){
 							
-							var url = '/typeOfProductCategory';
+							var url = '/typeOfProductCategoryGrid';
 							event.preventDefault();
 							$.ajax({url: url, success: function(result){
 									$("#main").html(result);
