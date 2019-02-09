@@ -24,19 +24,61 @@
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resource</a>
 				  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#typeOfTravelDocument" id="typeOfTravelDocument">TypeOfTravelDocument</a>
-					<a class="dropdown-item" href="#typeOfService" id="typeOfService">TypeOfServices</a>
-					<a class="dropdown-item" href="#typeOfProductCategory" id="typeOfProductCategory">TypeOfProductCategories</a>
+					<a class="dropdown-item" href="#typeOfFacility" id="typeOfFacility">TypeOfFacility</a>
+					<a class="dropdown-item" href="#typeOfFareProduct" id="typeOfFareProduct">TypeOfFareProduct</a>
+					<a class="dropdown-item" href="#branding" id="branding">Branding</a>
+					<a class="dropdown-item" href="#priceUnit" id="priceUnit">PriceUnit</a>
+					<a class="dropdown-item" href="#typeOfPoint" id="typeOfPoint">TypeOfPoint</a>
+					<a class="dropdown-item" href="#typeOfService" id="typeOfService">TypeOfService</a>
+					<a class="dropdown-item" href="#typeOfTariff" id="typeOfTariff">TypeOfTariff</a>
+					<a class="dropdown-item" href="#typeOfUsageParameter" id="typeOfUsageParameter">TypeOfUsageParameter</a>
+					<a class="dropdown-item" href="#pointOfInterestClassification" id="pointOfInterestClassification">PointOfInterestClassification</a>
+					<a class="dropdown-item" href="#typeOfOrganisation" id="typeOfOrganisation">TypeOfOrganisation</a>
+					<a class="dropdown-item" href="#typeOfZone" id="typeOfZone">TypeOfZone</a>
+					<a class="dropdown-item" href="#typeOfProductCategory" id="typeOfProductCategory">TypeOfProductCategory</a>
+					<a class="dropdown-item" href="#direction" id="direction">Direction</a>
+					<a class="dropdown-item" href="#typeOfSalesPackage" id="typeOfSalesPackage">TypeOfSalesPackage</a>
 					
 				  </div>
 				  
 				  </li>
 				  <li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">FareFrame</a>
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Common</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					  <a class="dropdown-item" href="#">MÃ©g nem tudom</a>
-					  <a class="dropdown-item" href="#">MÃ¡sik amit nem tudok</a>
-					  <div class="dropdown-divider"></div>
-					  <a class="dropdown-item" href="#">Something else here</a>
+					  	<a class="dropdown-item" href="#PricingParameterSet" id="PricingParameterSet">PricingParameterSet</a>
+						<a class="dropdown-item" href="#GeographicalUnit" id="GeographicalUnit">GeographicalUnit</a>
+						<a class="dropdown-item" href="#GeographicalInterval" id="GeographicalInterval">GeographicalInterval</a>
+						<a class="dropdown-item" href="#FareTable" id="FareTable">FareTable</a>
+						<a class="dropdown-item" href="#GeographicalIntervalPrice" id="GeographicalIntervalPrice">GeographicalIntervalPrice</a>
+						<a class="dropdown-item" href="#DiscountingRule" id="DiscountingRule">DiscountingRule</a>
+						<a class="dropdown-item" href="#TravelDocument" id="TravelDocument">TravelDocument</a>					  
+					</div>
+				  </li>
+				  
+				  <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fare</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					  	<a class="dropdown-item" href="#FareFrame" id="FareFrame">FareFrame</a>
+						<a class="dropdown-item" href="#Tariff" id="Tariff">Tariff</a>
+						<a class="dropdown-item" href="#ValidableElement" id="ValidableElement">ValidableElement</a>
+						<a class="dropdown-item" href="#GenericParameterAssignment" id="GenericParameterAssignment">GenericParameterAssignment</a>
+						<a class="dropdown-item" href="#ControllableElement" id="ControllableElement">ControllableElement</a>
+						<a class="dropdown-item" href="#FrequencyOfUse" id="FrequencyOfUse">FrequencyOfUse</a>
+						<a class="dropdown-item" href="#UsageValidityPeriod" id="UsageValidityPeriod">UsageValidityPeriod</a>
+						<a class="dropdown-item" href="#UsageParameter" id="UsageParameter"></a>
+						<a class="dropdown-item" href="#PurchaseWindow" id="PurchaseWindow">PurchaseWindow</a>
+						<a class="dropdown-item" href="#Transferability" id="Transferability">Transferability</a>
+						<a class="dropdown-item" href="#Interchanging" id="Interchanging">Interchanging</a>
+						<a class="dropdown-item" href="#UserProfile" id="UserProfile">UserProfile</a>
+						<a class="dropdown-item" href="#GroupTicket" id="GroupTicket">GroupTicket</a>
+						<a class="dropdown-item" href="#CompanionProfile" id="CompanionProfile">CompanionProfile</a>
+						<a class="dropdown-item" href="#CommercialProfile" id="CommercialProfile">CommercialProfile</a>
+						<a class="dropdown-item" href="#PreassignedFareProduct" id="PreassignedFareProduct">PreassignedFareProduct</a>
+						<a class="dropdown-item" href="#SupplementProduct" id="SupplementProduct">SupplementProduct</a>
+						<a class="dropdown-item" href="#DistributionChannel" id="DistributionChannel">DistributionChannel</a>
+						<a class="dropdown-item" href="#GroupOfDistributionChannels" id="GroupOfDistributionChannels">GroupOfDistributionChannels</a>
+						<a class="dropdown-item" href="#SalesPackage" id="SalesPackage">SalesPackage</a>
+						<a class="dropdown-item" href="#GroupOfSalesPackages" id="GroupOfSalesPackages">GroupOfSalesPackages</a>
 					</div>
 				  </li>
 				</ul>
@@ -68,6 +110,7 @@
 		   
 							 }});		    	
 						});
+						
 						$('a[href="#typeOfService"]').click(function(){
 							
 							var url = '/typeOfServiceGrid';
@@ -77,6 +120,7 @@
 		   
 							 }});		    	
 						});
+						
 						$('a[href="#typeOfProductCategory"]').click(function(){
 							
 							var url = '/typeOfProductCategoryGrid';
@@ -87,6 +131,406 @@
 							 }});		    	
 						});
 						
+						$('a[href="#typeOfFacility"]').click(function(){
+							
+							var url = '/typeOfFacilityGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+						$('a[href="#typeOfFareProduct"]').click(function(){
+							
+							var url = '/typeOfFareProductGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+						$('a[href="#branding"]').click(function(){
+							
+							var url = '/brandingGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#priceUnit"]').click(function(){
+							
+							var url = '/priceUnitGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#typeOfPoint"]').click(function(){
+							
+							var url = '/typeOfPointGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#typeOfTariff"]').click(function(){
+							
+							var url = '/typeOfTariffGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#typeOfUsageParameter"]').click(function(){
+							
+							var url = '/typeOfUsageParameterGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#pointOfInterestClassification"]').click(function(){
+							
+							var url = '/pointOfInterestClassificationGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#typeOfOrganisation"]').click(function(){
+							
+							var url = '/typeOfOrganisationGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#typeOfZone"]').click(function(){
+							
+							var url = '/typeOfZoneGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#direction"]').click(function(){
+							
+							var url = '/directionGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#typeOfSalesPackage"]').click(function(){
+							
+							var url = '/typeOfSalesPackageGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+						$('a[href="#PricingParameterSet"]').click(function(){
+							
+							var url = '/pricingParameterSetGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+						$('a[href="#GeographicalUnit"]').click(function(){
+							
+							var url = '/geographicalUnitGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#GeographicalInterval"]').click(function(){
+							
+							var url = '/geographicalIntervalGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#FareTable"]').click(function(){
+							
+							var url = '/fareTableGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#GeographicalIntervalPrice"]').click(function(){
+							
+							var url = '/geographicalIntervalPriceGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#DiscountingRule"]').click(function(){
+							
+							var url = '/discountingRuleGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#TravelDocument"]').click(function(){
+							
+							var url = '/travelDocumentGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+						$('a[href="#FareFrame"]').click(function(){
+							
+							var url = '/fareFrameGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+						
+
+						$('a[href="#Tariff"]').click(function(){
+							
+							var url = '/tariffGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#ValidableElement"]').click(function(){
+							
+							var url = '/validableElementGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#GenericParameterAssignment"]').click(function(){
+							
+							var url = 'genericParameterAssignment/Grid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#ControllableElement"]').click(function(){
+							
+							var url = '/controllableElementGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#FrequencyOfUse"]').click(function(){
+							
+							var url = '/frequencyOfUseGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#UsageValidityPeriod"]').click(function(){
+							
+							var url = '/usageValidityPeriodGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#UsageParameter"]').click(function(){
+							
+							var url = '/usageParameterGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#PurchaseWindow"]').click(function(){
+							
+							var url = '/purchaseWindowGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#Transferability"]').click(function(){
+							
+							var url = '/transferabilityGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#Interchanging"]').click(function(){
+							
+							var url = '/interchangingGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#UserProfile"]').click(function(){
+							
+							var url = '/userProfileGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#GroupTicket"]').click(function(){
+							
+							var url = '/groupTicketGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#CompanionProfile"]').click(function(){
+							
+							var url = '/companionProfileGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#CommercialProfile"]').click(function(){
+							
+							var url = '/commercialProfileGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#PreassignedFareProduct"]').click(function(){
+							
+							var url = '/preassignedFareProductGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#SupplementProduct"]').click(function(){
+							
+							var url = '/supplementProductGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#DistributionChannel"]').click(function(){
+							
+							var url = '/distributionChannelGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#GroupOfDistributionChannels"]').click(function(){
+							
+							var url = '/groupOfDistributionChannelsGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#SalesPackage"]').click(function(){
+							
+							var url = '/salesPackageGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
+
+						$('a[href="#GroupOfSalesPackages"]').click(function(){
+							
+							var url = '/groupOfSalesPackagesGrid';
+							event.preventDefault();
+							$.ajax({url: url, success: function(result){
+									$("#main").html(result);
+		   
+							 }});		    	
+						});
 						
 			});
 			</script>

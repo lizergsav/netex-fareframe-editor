@@ -1,0 +1,37 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/typeOfPoint}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('typeOfPoint.id','item.typeOfPoint.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfPoint.name.value','item.typeOfPoint.name.value','typeOfPoint.name.lang','Name','true')"></div>
+				<!-- ShortName -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfPoint.shortName.value','item.typeOfPoint.shortName.value','typeOfPoint.shortName.lang','Short Name','false')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('typeOfPoint.version','item.typeOfPoint.version','Version','true')"></div>
+				<!-- PrivateCode -->
+				<div th:replace="/html/privateCode :: privateCode(	'typeOfPoint.privateCode.value',
+																	'item.typeOfPoint.privateCode.value',
+																	'typeOfPoint.privateCode.type',
+																	'item.typeOfPoint.privateCode.type',
+																	'Private code','true')"></div>
+				<!-- hasPhoto 
+				<div th:replace="/html/boolean :: boolean('typeOfPoint.hasPhoto','Has Photo')"></div>
+				-->
+				
+				<!-- Description -->
+				<div th:replace="/html/textareaMulti :: textareaMulti('typeOfPoint.description.value','item.typeOfPoint.description.value','Description','typeOfPoint.description.lang')"></div>				
+				
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

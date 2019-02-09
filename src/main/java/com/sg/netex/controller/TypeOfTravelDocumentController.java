@@ -84,7 +84,7 @@ public class TypeOfTravelDocumentController {
 		Optional<TypeOfTravelDocumentDTO> typeOfTravelDocument;
 		
 		if (mongoId != null && mongoId.trim().length() > 0) {
-			 typeOfTravelDocument = typeOfTravelDocumentRepo.findById(mongoId);
+			typeOfTravelDocument = typeOfTravelDocumentRepo.findById(mongoId);
 		} else {
 			typeOfTravelDocument = Optional.of(new TypeOfTravelDocumentDTO());
 			TypeOfTravelDocument doc = new TypeOfTravelDocument();
@@ -108,7 +108,7 @@ public class TypeOfTravelDocumentController {
 		
 		typeOfTravelDocumentRepo.save(typeOfTravelDocument);
 		
-		return "html/modified";
+		return "index";
     }
 
 	@RequestMapping(value = "/typeOfTravelDocument", method = RequestMethod.DELETE)
@@ -120,6 +120,6 @@ public class TypeOfTravelDocumentController {
 			System.out.println("Missing "+ mongoId + " id");
 		}
 		
-		return "html/deleted";
+		return "index";
     }
 }

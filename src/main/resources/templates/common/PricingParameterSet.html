@@ -1,0 +1,26 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/pricingParameterSet}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('pricingParameterSet.id','item.pricingParameterSet.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('pricingParameterSet.name.value','item.pricingParameterSet.name.value','pricingParameterSet.name.lang','Name','true')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('pricingParameterSet.version','item.pricingParameterSet.version','Version','true')"></div>
+								
+				<!-- pricingRules -->
+				<div th:replace="/html/simpleTable :: grid('pricingParameterSet.pricingRules','item.pricingParameterSet.pricingRules','PricingRules')"></div>
+				
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

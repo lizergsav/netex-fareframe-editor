@@ -26,27 +26,28 @@ import com.sg.netex.repository.TypeOfProductCategoryRepository;
 public class TypeOfProductCategoryController {
 
 	@Autowired
-	private UtilConfig dozer;
+	TypeOfProductCategoryRepository typeOfProductCategoryRepo;
 
 	@Autowired
-	TypeOfProductCategoryRepository typeOfProductCategoryRepository; 
-
-	@RequestMapping(value = "/typeOfProductCategories", method = RequestMethod.GET)
-    public ResponseEntity<List<TypeOfProductCategoryDTO>> typeOfProductCategories(Model model) {
-    	List<TypeOfProductCategoryDTO> items = typeOfProductCategoryRepository.findAll();
+	private UtilConfig dozer;
+	
+	@RequestMapping(value = "/typeOfProductCategorys", method = RequestMethod.GET)
+    public ResponseEntity<List<TypeOfProductCategoryDTO>> typeOfProductCategorys(Model model) {
+    	List<TypeOfProductCategoryDTO> typeOfProductCategorys = typeOfProductCategoryRepo.findAll();
     	
-        return new ResponseEntity<>(items,HttpStatus.OK);
+        return new ResponseEntity<>(typeOfProductCategorys,HttpStatus.OK);
     }
 	
-	//ProductCategory
+	
+	// the simple table view for thymeleaf
 	@RequestMapping(value = "/typeOfProductCategoryGrid", method = RequestMethod.GET)
     public String typeOfProductCategory(Model model) {
 		
-		List<TypeOfProductCategoryDTO> types = typeOfProductCategoryRepository.findAll();
+		List<TypeOfProductCategoryDTO> typeOfProductCategorys = typeOfProductCategoryRepo.findAll();
     	
 		List<GenericTable> tableItems = new ArrayList<>();
 		
-		for (TypeOfProductCategoryDTO list : types) {
+		for (TypeOfProductCategoryDTO list : typeOfProductCategorys) {
 			GenericTable item = new GenericTable();
 			if (list.getTypeOfProductCategory().getDescription() != null)
 				item.setDescription(list.getTypeOfProductCategory().getDescription().getValue());
@@ -68,7 +69,7 @@ public class TypeOfProductCategoryController {
 		model.addAttribute("tableItems",tableItems);
 		
         ButtonEvents action = new ButtonEvents();
-        action.setGetUrl("/typeOfProductCategories");
+        action.setGetUrl("/typeOfProductCategorys");
         action.setModifyItemUrl("/typeOfProductCategory");
         action.setDeleteItemUrl("/typeOfProductCategory");
         model.addAttribute("action", action);
@@ -78,49 +79,47 @@ public class TypeOfProductCategoryController {
     }
 	
 	@RequestMapping(value = "/typeOfProductCategory", method = RequestMethod.GET)
-    public String manageTypeOfProductCategory(Model model,@RequestParam(required=false) String mongoId) {
+    public String newTypeOfProductCategory(Model model,@RequestParam(required=false) String mongoId) {
     	
-		Optional<TypeOfProductCategoryDTO> item;
+		Optional<TypeOfProductCategoryDTO> typeOfProductCategory;
 		
 		if (mongoId != null && mongoId.trim().length() > 0) {
-			 item = typeOfProductCategoryRepository.findById(mongoId);
+			typeOfProductCategory = typeOfProductCategoryRepo.findById(mongoId);
 		} else {
-			item = Optional.of(new TypeOfProductCategoryDTO());
+			typeOfProductCategory = Optional.of(new TypeOfProductCategoryDTO());
 			TypeOfProductCategory doc = new TypeOfProductCategory();
-			item.get().setTypeOfProductCategory(doc);
+			typeOfProductCategory.get().setTypeOfProductCategory(doc);
 			
-			item.get().getTypeOfProductCategory().setId(dozer.generateNetexName("typeOfProductCategory"));
-			item.get().getTypeOfProductCategory().setVersion("latest");
+			typeOfProductCategory.get().getTypeOfProductCategory().setId(dozer.generateNetexName("typeOfProductCategory"));
+			typeOfProductCategory.get().getTypeOfProductCategory().setVersion("latest");
 		}
 				
-        model.addAttribute("item", item);
+        model.addAttribute("item", typeOfProductCategory);
 
         return "resourceFrame/typeOfProductCategory.html :: edit";
     }
 	
 	@RequestMapping(value = "/typeOfProductCategory", method = RequestMethod.POST)
-    public String saveTypeOfProductCategory(@ModelAttribute TypeOfProductCategoryDTO input, BindingResult errors, Model model) {
+    public String saveTypeOfProductCategory(@ModelAttribute TypeOfProductCategoryDTO typeOfProductCategory, BindingResult errors, Model model) {
 		
-		input.setMongoId(dozer.generateMongoId(input.getTypeOfProductCategory().getId(), input.getTypeOfProductCategory().getVersion(), "typeOfProductCategory"));
-		input.setId(input.getTypeOfProductCategory().getId());
-		input.setVersion(input.getTypeOfProductCategory().getVersion());
+		typeOfProductCategory.setMongoId(dozer.generateMongoId(typeOfProductCategory.getTypeOfProductCategory().getId(), typeOfProductCategory.getTypeOfProductCategory().getVersion(), "typeOfProductCategory"));
+		typeOfProductCategory.setId(typeOfProductCategory.getTypeOfProductCategory().getId());
+		typeOfProductCategory.setVersion(typeOfProductCategory.getTypeOfProductCategory().getVersion());
 		
+		typeOfProductCategoryRepo.save(typeOfProductCategory);
 		
-		typeOfProductCategoryRepository.save(input);
-		
-		return "html/modified";
+		return "index";
     }
 
 	@RequestMapping(value = "/typeOfProductCategory", method = RequestMethod.DELETE)
-    public String deletetypeOfProductCategory(Model model,@RequestParam(required=true) String mongoId) {
+    public String deleteTypeOfProductCategory(Model model,@RequestParam(required=true) String mongoId) {
 		
-		if (typeOfProductCategoryRepository.findById(mongoId).isPresent()) {
-			typeOfProductCategoryRepository.deleteById(mongoId);
+		if (typeOfProductCategoryRepo.findById(mongoId).isPresent()) {
+			typeOfProductCategoryRepo.deleteById(mongoId);
 		} else {
 			System.out.println("Missing "+ mongoId + " id");
 		}
 		
-		return "html/deleted";
+		return "index";
     }
-	
 }

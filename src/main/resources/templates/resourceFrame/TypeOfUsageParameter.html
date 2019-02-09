@@ -1,0 +1,37 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/typeOfUsageParameter}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('typeOfUsageParameter.id','item.typeOfUsageParameter.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfUsageParameter.name.value','item.typeOfUsageParameter.name.value','typeOfUsageParameter.name.lang','Name','true')"></div>
+				<!-- ShortName -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfUsageParameter.shortName.value','item.typeOfUsageParameter.shortName.value','typeOfUsageParameter.shortName.lang','Short Name','false')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('typeOfUsageParameter.version','item.typeOfUsageParameter.version','Version','true')"></div>
+				<!-- PrivateCode -->
+				<div th:replace="/html/privateCode :: privateCode(	'typeOfUsageParameter.privateCode.value',
+																	'item.typeOfUsageParameter.privateCode.value',
+																	'typeOfUsageParameter.privateCode.type',
+																	'item.typeOfUsageParameter.privateCode.type',
+																	'Private code','true')"></div>
+				<!-- hasPhoto 
+				<div th:replace="/html/boolean :: boolean('typeOfUsageParameter.hasPhoto','Has Photo')"></div>
+				-->
+				
+				<!-- Description -->
+				<div th:replace="/html/textareaMulti :: textareaMulti('typeOfUsageParameter.description.value','item.typeOfUsageParameter.description.value','Description','typeOfUsageParameter.description.lang')"></div>				
+				
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

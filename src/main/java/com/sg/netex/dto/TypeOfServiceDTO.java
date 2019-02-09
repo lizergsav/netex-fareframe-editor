@@ -5,9 +5,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="TypeOfService")
 public class TypeOfServiceDTO extends BaseDTO {
-
+	
 	private TypeOfService typeOfService;
-
+	
 	public TypeOfService getTypeOfService() {
 		return typeOfService;
 	}
@@ -15,6 +15,6 @@ public class TypeOfServiceDTO extends BaseDTO {
 	public void setTypeOfService(TypeOfService typeOfService) {
 		this.typeOfService = typeOfService;
 	}
-
+	
 	
 }

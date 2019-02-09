@@ -1,0 +1,37 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/typeOfOrganisation}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('typeOfOrganisation.id','item.typeOfOrganisation.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfOrganisation.name.value','item.typeOfOrganisation.name.value','typeOfOrganisation.name.lang','Name','true')"></div>
+				<!-- ShortName -->
+				<div th:replace="/html/inputMulti :: inputMulti('typeOfOrganisation.shortName.value','item.typeOfOrganisation.shortName.value','typeOfOrganisation.shortName.lang','Short Name','false')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('typeOfOrganisation.version','item.typeOfOrganisation.version','Version','true')"></div>
+				<!-- PrivateCode -->
+				<div th:replace="/html/privateCode :: privateCode(	'typeOfOrganisation.privateCode.value',
+																	'item.typeOfOrganisation.privateCode.value',
+																	'typeOfOrganisation.privateCode.type',
+																	'item.typeOfOrganisation.privateCode.type',
+																	'Private code','true')"></div>
+				<!-- hasPhoto 
+				<div th:replace="/html/boolean :: boolean('typeOfOrganisation.hasPhoto','Has Photo')"></div>
+				-->
+				
+				<!-- Description -->
+				<div th:replace="/html/textareaMulti :: textareaMulti('typeOfOrganisation.description.value','item.typeOfOrganisation.description.value','Description','typeOfOrganisation.description.lang')"></div>				
+				
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

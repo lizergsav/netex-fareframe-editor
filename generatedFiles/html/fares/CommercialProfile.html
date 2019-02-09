@@ -1,0 +1,23 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/commercialProfile}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('commercialProfile.id','item.commercialProfile.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('commercialProfile.name.value','item.commercialProfile.name.value','commercialProfile.name.lang','Name','true')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('commercialProfile.version','item.commercialProfile.version','Version','true')"></div>
+								
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

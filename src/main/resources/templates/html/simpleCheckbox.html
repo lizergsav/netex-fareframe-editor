@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="input(fieldName,fieldValue,label)">
+		<tr>
+			<td><label th:text="${label}"></label></td>
+			<td ><input class="form-control" th:field="*{__${fieldName}__}" type="checkbox" /></td>
+		</tr> 
+	</div>
+</body>
+</html>

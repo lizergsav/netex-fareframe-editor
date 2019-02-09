@@ -1,0 +1,23 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/discountingRule}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('discountingRule.id','item.discountingRule.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('discountingRule.name.value','item.discountingRule.name.value','discountingRule.name.lang','Name','true')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('discountingRule.version','item.discountingRule.version','Version','true')"></div>
+								
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

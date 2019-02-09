@@ -1,0 +1,37 @@
+	<div id="edit" th:fragment="edit">
+		<form id="submitForm" action="" th:action="@{/pointOfInterestClassification}" method="POST" th:object="${item}">
+		<table name="submitForm"  class="table table-bordered" align="center">
+			<tbody>
+				<!-- Netex Id -->
+				<div th:replace="/html/simpleInput :: input('pointOfInterestClassification.id','item.pointOfInterestClassification.id','Id','true')"></div>
+				<!-- Name -->
+				<div th:replace="/html/inputMulti :: inputMulti('pointOfInterestClassification.name.value','item.pointOfInterestClassification.name.value','pointOfInterestClassification.name.lang','Name','true')"></div>
+				<!-- ShortName -->
+				<div th:replace="/html/inputMulti :: inputMulti('pointOfInterestClassification.shortName.value','item.pointOfInterestClassification.shortName.value','pointOfInterestClassification.shortName.lang','Short Name','false')"></div>
+				<!-- version -->
+				<div th:replace="/html/simpleInput :: input('pointOfInterestClassification.version','item.pointOfInterestClassification.version','Version','true')"></div>
+				<!-- PrivateCode -->
+				<div th:replace="/html/privateCode :: privateCode(	'pointOfInterestClassification.privateCode.value',
+																	'item.pointOfInterestClassification.privateCode.value',
+																	'pointOfInterestClassification.privateCode.type',
+																	'item.pointOfInterestClassification.privateCode.type',
+																	'Private code','true')"></div>
+				<!-- hasPhoto 
+				<div th:replace="/html/boolean :: boolean('pointOfInterestClassification.hasPhoto','Has Photo')"></div>
+				-->
+				
+				<!-- Description -->
+				<div th:replace="/html/textareaMulti :: textareaMulti('pointOfInterestClassification.description.value','item.pointOfInterestClassification.description.value','Description','pointOfInterestClassification.description.lang')"></div>				
+				
+				<!-- Operator -->
+				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
+								
+				<tr>
+					<td><input type="submit" value="Submit" /></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+		
+		
+	</div>

@@ -10,3 +10,6 @@ public class RunApplication {
 		SpringApplication.run(RunApplication.class, args);
 	}
 }
+
+
+// be kelll majd még álltani a framedefaults-ot

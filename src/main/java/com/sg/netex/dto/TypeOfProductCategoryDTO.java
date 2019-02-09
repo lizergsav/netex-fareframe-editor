@@ -5,9 +5,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="TypeOfProductCategory")
 public class TypeOfProductCategoryDTO extends BaseDTO {
-
+	
 	private TypeOfProductCategory typeOfProductCategory;
-
+	
 	public TypeOfProductCategory getTypeOfProductCategory() {
 		return typeOfProductCategory;
 	}
@@ -15,6 +15,6 @@ public class TypeOfProductCategoryDTO extends BaseDTO {
 	public void setTypeOfProductCategory(TypeOfProductCategory typeOfProductCategory) {
 		this.typeOfProductCategory = typeOfProductCategory;
 	}
-
+	
 	
 }

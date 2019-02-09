@@ -1,0 +1,79 @@
+
+<div id="grid" th:fragment="grid(fieldName,data,label)">	
+		<div id="toolbar">
+			<button type="button" id="newItem" class="btn btn-secondary">New</button>
+			<button type="button" id="modify" class="btn btn-secondary">Modify</button>
+			<button type="button" id="delete" class="btn btn-secondary">Delete</button>
+		</div>
+		<label th:text="${label}"></label>			
+		<table    th:if="${data != null && data.size() > 0}"
+				  id="table"
+				  th:field="*{__${fieldName}__}"
+				  data-toolbar="#toolbar"
+				  data-search="true"
+				  data-show-refresh="true"
+				  data-show-toggle="true"
+				  data-show-columns="true"
+				  data-detail-view="true"
+				  data-detail-formatter="detailFormatter"
+				  data-minimum-count-columns="2"
+				  data-show-pagination-switch="true"
+				  data-pagination="true"
+				  data-id-field="mongoId"
+				  data-page-list="[10, 25, 50, 100, ALL]"
+				  data-show-footer="false"
+				  data-side-pagination="client"
+				  
+				  data-click-to-select="true"
+				  >
+				  <thead>
+				    <tr>
+				      <th data-field="state" data-checkbox="true"></th>
+				      <th data-field="id" >Id</th>
+				      <th data-field="name">Item Name</th>
+				    </tr>
+				  </thead>
+				  </table>
+		<br>
+		<div id="edit" >
+			<input type="text" name="id"/>
+		</div>
+		
+		<script th:inline="javascript">
+		$(document).ready(function() {
+			
+			$('#edit').hide();
+			
+			var data = [[${data}]];
+			
+			console.log("log data");
+			console.log(data);
+			
+			$('#table').bootstrapTable({
+			  data: data,
+			  pagination: true
+			});
+			
+			$('#newItem').click(function(){
+			
+				$('#edit').show();
+				
+			});
+			
+			
+			$('#modify').click(function(){
+
+				console.log("modify");
+				
+			});
+			
+			$('#delete').click(function(){
+
+				console.log("delete");
+				
+			});			
+			
+			
+		});
+		</script>
+	</div>

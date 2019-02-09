@@ -24,29 +24,30 @@ import com.sg.netex.repository.TypeOfServiceRepository;
 
 @Controller
 public class TypeOfServiceController {
-	
-	@Autowired
-	private UtilConfig dozer;
 
 	@Autowired
-	TypeOfServiceRepository typeOfServiceRepository; 
+	TypeOfServiceRepository typeOfServiceRepo;
+
+	@Autowired
+	private UtilConfig dozer;
 	
-	@RequestMapping(value = "/typeOfservices", method = RequestMethod.GET)
-    public ResponseEntity<List<TypeOfServiceDTO>> typeOfservices(Model model) {
-    	List<TypeOfServiceDTO> typeOfTravelDocuments = typeOfServiceRepository.findAll();
+	@RequestMapping(value = "/typeOfServices", method = RequestMethod.GET)
+    public ResponseEntity<List<TypeOfServiceDTO>> typeOfServices(Model model) {
+    	List<TypeOfServiceDTO> typeOfServices = typeOfServiceRepo.findAll();
     	
-        return new ResponseEntity<>(typeOfTravelDocuments,HttpStatus.OK);
+        return new ResponseEntity<>(typeOfServices,HttpStatus.OK);
     }
 	
-	//typeOfService
+	
+	// the simple table view for thymeleaf
 	@RequestMapping(value = "/typeOfServiceGrid", method = RequestMethod.GET)
     public String typeOfService(Model model) {
 		
-		List<TypeOfServiceDTO> types = typeOfServiceRepository.findAll();
+		List<TypeOfServiceDTO> typeOfServices = typeOfServiceRepo.findAll();
     	
 		List<GenericTable> tableItems = new ArrayList<>();
 		
-		for (TypeOfServiceDTO list : types) {
+		for (TypeOfServiceDTO list : typeOfServices) {
 			GenericTable item = new GenericTable();
 			if (list.getTypeOfService().getDescription() != null)
 				item.setDescription(list.getTypeOfService().getDescription().getValue());
@@ -78,48 +79,47 @@ public class TypeOfServiceController {
     }
 	
 	@RequestMapping(value = "/typeOfService", method = RequestMethod.GET)
-    public String manageTypeOfService(Model model,@RequestParam(required=false) String mongoId) {
+    public String newTypeOfService(Model model,@RequestParam(required=false) String mongoId) {
     	
-		Optional<TypeOfServiceDTO> item;
+		Optional<TypeOfServiceDTO> typeOfService;
 		
 		if (mongoId != null && mongoId.trim().length() > 0) {
-			 item = typeOfServiceRepository.findById(mongoId);
+			typeOfService = typeOfServiceRepo.findById(mongoId);
 		} else {
-			item = Optional.of(new TypeOfServiceDTO());
+			typeOfService = Optional.of(new TypeOfServiceDTO());
 			TypeOfService doc = new TypeOfService();
-			item.get().setTypeOfService(doc);
+			typeOfService.get().setTypeOfService(doc);
 			
-			item.get().getTypeOfService().setId(dozer.generateNetexName("typeOfService"));
-			item.get().getTypeOfService().setVersion("latest");
+			typeOfService.get().getTypeOfService().setId(dozer.generateNetexName("typeOfService"));
+			typeOfService.get().getTypeOfService().setVersion("latest");
 		}
 				
-        model.addAttribute("item", item);
+        model.addAttribute("item", typeOfService);
 
         return "resourceFrame/typeOfService.html :: edit";
     }
 	
 	@RequestMapping(value = "/typeOfService", method = RequestMethod.POST)
-    public String saveTypeOfService(@ModelAttribute TypeOfServiceDTO input, BindingResult errors, Model model) {
+    public String saveTypeOfService(@ModelAttribute TypeOfServiceDTO typeOfService, BindingResult errors, Model model) {
 		
-		input.setMongoId(dozer.generateMongoId(input.getTypeOfService().getId(), input.getTypeOfService().getVersion(), "typeOfService"));
-		input.setId(input.getTypeOfService().getId());
-		input.setVersion(input.getTypeOfService().getVersion());
+		typeOfService.setMongoId(dozer.generateMongoId(typeOfService.getTypeOfService().getId(), typeOfService.getTypeOfService().getVersion(), "typeOfService"));
+		typeOfService.setId(typeOfService.getTypeOfService().getId());
+		typeOfService.setVersion(typeOfService.getTypeOfService().getVersion());
 		
-		typeOfServiceRepository.save(input);
+		typeOfServiceRepo.save(typeOfService);
 		
-		return "html/modified";
+		return "index";
     }
-	
+
 	@RequestMapping(value = "/typeOfService", method = RequestMethod.DELETE)
-    public String deletetypeOfService(Model model,@RequestParam(required=true) String mongoId) {
+    public String deleteTypeOfService(Model model,@RequestParam(required=true) String mongoId) {
 		
-		if (typeOfServiceRepository.findById(mongoId).isPresent()) {
-			typeOfServiceRepository.deleteById(mongoId);
+		if (typeOfServiceRepo.findById(mongoId).isPresent()) {
+			typeOfServiceRepo.deleteById(mongoId);
 		} else {
 			System.out.println("Missing "+ mongoId + " id");
 		}
 		
-		return "html/deleted";
+		return "index";
     }
-	
 }
