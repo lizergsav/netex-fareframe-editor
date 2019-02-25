@@ -75,7 +75,7 @@ public class PriceUnitController {
         model.addAttribute("action", action);
         
         
-        return "/html/genericTable.html :: grid";
+        return "/html/simpleTable.html :: grid";
     }
 	
 	@RequestMapping(value = "/priceUnit", method = RequestMethod.GET)

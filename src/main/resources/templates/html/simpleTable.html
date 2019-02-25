@@ -1,14 +1,12 @@
-
-<div id="grid" th:fragment="grid(fieldName,data,label)">	
+<div id="grid" th:fragment="grid">	
 		<div id="toolbar">
 			<button type="button" id="newItem" class="btn btn-secondary">New</button>
 			<button type="button" id="modify" class="btn btn-secondary">Modify</button>
 			<button type="button" id="delete" class="btn btn-secondary">Delete</button>
 		</div>
-		<label th:text="${label}"></label>			
-		<table    th:if="${data != null && data.size() > 0}"
+					
+		<table    th:if="${tableItems.size() > 0}"
 				  id="table"
-				  th:field="*{__${fieldName}__}"
 				  data-toolbar="#toolbar"
 				  data-search="true"
 				  data-show-refresh="true"
@@ -29,22 +27,19 @@
 				  <thead>
 				    <tr>
 				      <th data-field="state" data-checkbox="true"></th>
-				      <th data-field="id" >Id</th>
+				      <th data-field="mongoId" >Netex Id</th>
 				      <th data-field="name">Item Name</th>
+				      <th data-field="version">Version</th>
 				    </tr>
 				  </thead>
 				  </table>
 		<br>
-		<div id="edit" >
-			<input type="text" name="id"/>
-		</div>
+		
 		
 		<script th:inline="javascript">
 		$(document).ready(function() {
 			
-			$('#edit').hide();
-			
-			var data = [[${data}]];
+			var data = [[${tableItems}]];
 			
 			console.log("log data");
 			console.log(data);
@@ -55,22 +50,46 @@
 			});
 			
 			$('#newItem').click(function(){
-			
-				$('#edit').show();
+				var url = [[${action.modifyItemUrl}]]
+				$.ajax({url: url, 
+						method: 'GET',
+						success: function(result){
+						$("#main").html(result);
+
+			 	}});		
+				
+				console.log(url);
 				
 			});
 			
 			
 			$('#modify').click(function(){
+				var param = $('#table').bootstrapTable('getSelections');
+				if (param.length == 1){
+					var url = [[${action.modifyItemUrl}]]+'?mongoId='+param[0].mongoId;
+					$.ajax({url: url, 
+						method: 'GET',
+						success: function(result){
+						$("#main").html(result);
 
-				console.log("modify");
+			 	}});		
+				}
 				
+				console.log(param);
 			});
 			
 			$('#delete').click(function(){
-
-				console.log("delete");
-				
+				var param = $('#table').bootstrapTable('getSelections');
+				if (param.length == 1){
+					var url = [[${action.deleteItemUrl}]]+'?mongoId='+param[0].mongoId;
+					console.log(url);
+					$.ajax({url: url, 
+							method: 'DELETE',
+							success: function(result){
+							$("#main").html(result);
+	
+				 	}});	
+				}
 			});			
 			
 			

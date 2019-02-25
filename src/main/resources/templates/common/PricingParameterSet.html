@@ -2,6 +2,7 @@
 		<form id="submitForm" action="" th:action="@{/pricingParameterSet}" method="POST" th:object="${item}">
 		<table name="submitForm"  class="table table-bordered" align="center">
 			<tbody>
+				
 				<!-- Netex Id -->
 				<div th:replace="/html/simpleInput :: input('pricingParameterSet.id','item.pricingParameterSet.id','Id','true')"></div>
 				<!-- Name -->
@@ -9,12 +10,56 @@
 				<!-- version -->
 				<div th:replace="/html/simpleInput :: input('pricingParameterSet.version','item.pricingParameterSet.version','Version','true')"></div>
 								
-				<!-- pricingRules -->
-				<div th:replace="/html/simpleTable :: grid('pricingParameterSet.pricingRules','item.pricingParameterSet.pricingRules','PricingRules')"></div>
-				
 				<!-- Operator -->
 				<div th:replace="/html/selectOption :: option('operator','Operator name','item.operator','/BaseInfo')"/>
-								
+				
+				<tr>				
+					<td>
+						<label >DiscountingRule</label>
+					</td>
+					<td>
+					<button type="button" id="newDiscountingRule" class="btn btn-secondary">New</button>
+					<table  
+					  id="DiscountingRuleGrid"
+					  data-minimum-count-columns="2"
+					  data-show-pagination-switch="true"
+					  data-pagination="true"
+					  data-id-field="id"
+					  data-page-list="[10, 25, 50, 100, ALL]"
+					  data-side-pagination="client"
+					  data-click-to-select="true"
+					  >
+					  <thead>
+					    <tr>
+					      <th data-field="state" data-checkbox="true"></th>
+					      <th data-field="id" >Netex Id</th>
+					      <th data-field="name.value">Item Name</th>
+					      <th data-field="version">Version</th>
+					    </tr>
+					  </thead>
+				  </table>
+				  <br>
+				  <hr>
+					<div id="newDiscountingRuleDiv" style="display: none;">
+						<table  
+							  id="newDiscountingRuleGrid"
+							  data-id-field="id"
+							  data-click-to-select="true"
+							  >
+							  <thead>
+							    <tr>
+							    	<th data-field="state" data-checkbox="true"></th>
+								    <th data-field="id" >Netex Id</th>
+								    <th data-field="name.value">Item Name</th>
+								    <th data-field="version">Version</th>
+							    </tr>
+							  </thead>
+						  </table>
+						  <button type="button" id="addDiscountingRule" class="btn btn-secondary">Add item to list</button>
+					</div>		
+					</td>
+				</tr>
+				
 				<tr>
 					<td><input type="submit" value="Submit" /></td>
 				</tr>
@@ -22,5 +67,54 @@
 		</table>
 		</form>
 		
-		
+		<script th:inline="javascript">
+			$(document).ready(function() {
+			var formData = [[${item}]];
+			var discountingRuleData = [[${item.pricingParameterSet.pricingRules}]];
+			var list = 	[[${discountingRules}]];
+			
+			if ( !discountingRuleData == null){
+			
+				$('#DiscountingRuleGrid').bootstrapTable({
+					  data: discountingRuleData,
+					  pagination: true
+				});
+
+			}
+			
+			$('#newDiscountingRule').click(function(){
+				
+				$("#newDiscountingRuleDiv").show();
+				
+				$('#newDiscountingRuleGrid').bootstrapTable({
+					  data: list,
+					  pagination: true
+				});
+			});
+			
+			$('#addDiscountingRule').click(function(){
+				if (formData.mongoId == null){
+					alert("First please save the main data and after can be saved the discountingRule!");
+				} else {
+					$("#newDiscountingRuleDiv").hide();
+					var param = $('#newDiscountingRuleGrid').bootstrapTable('getSelections');
+					
+					$.ajax({
+						  type: "PUT",
+						  url: '/pricingParameterSetDiscountingRules'+'?mongoId='+formData.mongoId,
+						  data: JSON.stringify(param),
+						  dataType: 'json',
+						  contentType: "application/json",
+						  success: function(result){
+							  discountingRuleData = result.gridView;
+							  list = result.chosenView;
+						  }
+						});	
+				}
+				
+			});
+
+		});
+		</script>
+				
 	</div>

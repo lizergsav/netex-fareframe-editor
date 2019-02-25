@@ -1,0 +1,53 @@
+<div id="table" th:fragment="table(data,label,input,service)">	
+
+
+		<tr>
+			<td><label th:text="${label}"></label></td>
+		<td>
+			 <table id="grid2"></table>
+
+			<input type="text" value="" readonly />
+			<select class="selectpicker" th:id="${ input }">
+			    
+			</select>
+		</td>
+		</tr>
+		<script th:inline="javascript">
+		$(document).ready(function() {
+
+			console.log("Grid data: " + [[${data}]]);
+		     var grid = $('#grid2').grid({
+		         dataSource: [[${data}]],
+		         columns: [ { field: 'id', width: 56 }, { field: 'Name' }, { field: 'PlaceOfBirth' } ],
+		         selectionMethod: 'checkbox'
+		     });
+		     grid.on('rowSelect', function (e, $row, id, record) {
+		         alert('Row with id=' + id + ' is selected.');
+		     });
+			
+			var name = [[${input}]];
+			var local = $("input[type=text][name="+name+"]").val();
+			
+			$('.selectpicker').change(function(){
+				var end = this.value;
+				$("input[type=text][name="+name+"]").val(end);
+			});
+			
+			 $.ajax({url: [[${service}]], 
+				 	success: function(result){
+				 		console.log("url"+url);
+				 		if (result != null && result.length > 0){
+							 for (i = 0; i < result.length;i++ ){
+									$('.selectpicker').append($("<option/>").attr("value",result[i].id).text(result[i].name));
+								}
+							 $('.selectpicker').val(local);
+						 } else {
+							 $('.selectpicker').val();
+						 }
+					}
+			 });			
+			
+		});
+		</script>
+		
+</div>
