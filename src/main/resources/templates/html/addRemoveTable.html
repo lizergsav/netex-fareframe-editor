@@ -1,0 +1,98 @@
+<div id="grid" th:fragment="grid(view,options,label,viewRest,optionsRest,form )">
+				<tr>				
+					<td>
+						<label >${label}</label>
+					</td>
+					<td>
+					<button type="button" id="newDiscountingRule" class="btn btn-secondary">New</button>
+					<table  
+					  id="DiscountingRuleGrid"+${label}
+					  data-minimum-count-columns="2"
+					  data-show-pagination-switch="true"
+					  data-pagination="true"
+					  data-id-field="id"
+					  data-page-list="[10, 25, 50, 100, ALL]"
+					  data-side-pagination="client"
+					  data-click-to-select="true"
+					  >
+					  <thead>
+					    <tr>
+					      <th data-field="state" data-checkbox="true"></th>
+					      <th data-field="id" >Netex Id</th>
+					      <th data-field="name.value">Item Name</th>
+					      <th data-field="version">Version</th>
+					    </tr>
+					  </thead>
+				  </table>
+				  <br>
+				  <hr>
+					<div id="newDiscountingRuleDiv"+${label} style="display: none;">
+						<table  
+							  id="newDiscountingRuleGrid"+${label}
+							  data-id-field="id"
+							  data-click-to-select="true"
+							  >
+							  <thead>
+							    <tr>
+							    	<th data-field="state" data-checkbox="true"></th>
+								    <th data-field="id" >Netex Id</th>
+								    <th data-field="name.value">Item Name</th>
+								    <th data-field="version">Version</th>
+							    </tr>
+							  </thead>
+						  </table>
+						  <button type="button" id="addDiscountingRule"+${label} class="btn btn-secondary">Add item to list</button>
+					</div>		
+					</td>
+				</tr>
+			<script th:inline="javascript">
+				$(document).ready(function() {
+				var formData = [[${form}]];
+				var discountingRuleData = [[${view}]];
+				var list = 	[[${options}]];
+				
+				if ( discountingRuleData != null){
+					console.log("discountingRuleData: " + discountingRuleData[0].name.value);			
+					$('#DiscountingRuleGrid'+[[${label}]]).bootstrapTable({
+						  data: discountingRuleData,
+						  pagination: true
+					});
+	
+				}
+				
+				$('#newDiscountingRule'+[[${label}]]).click(function(){
+					
+					$("#newDiscountingRuleDiv"+[[${label}]]).show();
+					
+					$('#newDiscountingRuleGrid'+[[${label}]]).bootstrapTable({
+						  data: list,
+						  pagination: true
+					});
+				});
+				
+				$('#addDiscountingRule'+[[${label}]]).click(function(event){
+					event.preventDefault();
+					if (formData.mongoId == null){
+						alert("First please save the main data and after can be saved the discountingRule!");
+					} else {
+						$("#newDiscountingRuleDiv"+[[${label}]]).hide();
+						var param = $('#newDiscountingRuleGrid'+[[${label}]]).bootstrapTable('getSelections');
+						
+						$.ajax({
+							  type: "PUT",
+							  url: '/pricingParameterSetDiscountingRules'+'?mongoId='+formData.mongoId,
+							  data: JSON.stringify(param),
+							  dataType: 'json',
+							  contentType: "application/json",
+							  success: function(result){
+								  
+							  }
+							});	
+					}
+					
+				});
+	
+			});
+		</script>
+				
+</div>

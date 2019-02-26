@@ -7,28 +7,28 @@ import org.springframework.http.HttpStatus;
 
 public class PricingParameterSetResult {
 	
-	private List<DiscountingRule> gridView;
+	private List<DiscountingRule> availableDiscounts;
 	
-	private List<DiscountingRule> chosenView;
+	private List<DiscountingRule> storedDiscounts;
 
 	private String result;
 	
 	private HttpStatus status;
-	
-	public List<DiscountingRule> getGridView() {
-		return gridView;
+		
+	public List<DiscountingRule> getAvailableDiscounts() {
+		return availableDiscounts;
 	}
 
-	public void setGridView(List<DiscountingRule> gridView) {
-		this.gridView = gridView;
+	public void setAvailableDiscounts(List<DiscountingRule> availableDiscounts) {
+		this.availableDiscounts = availableDiscounts;
 	}
 
-	public List<DiscountingRule> getChosenView() {
-		return chosenView;
+	public List<DiscountingRule> getStoredDiscounts() {
+		return storedDiscounts;
 	}
 
-	public void setChosenView(List<DiscountingRule> chosenView) {
-		this.chosenView = chosenView;
+	public void setStoredDiscounts(List<DiscountingRule> storedDiscounts) {
+		this.storedDiscounts = storedDiscounts;
 	}
 
 	public String getResult() {

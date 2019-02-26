@@ -19,6 +19,7 @@
 					</td>
 					<td>
 					<button type="button" id="newDiscountingRule" class="btn btn-secondary">New</button>
+					<button type="button" id="removeDiscountingRule" class="btn btn-secondary">Remove item from list</button>
 					<table  
 					  id="DiscountingRuleGrid"
 					  data-minimum-count-columns="2"
@@ -28,6 +29,7 @@
 					  data-page-list="[10, 25, 50, 100, ALL]"
 					  data-side-pagination="client"
 					  data-click-to-select="true"
+					  data-show-refresh="true"
 					  >
 					  <thead>
 					    <tr>
@@ -56,6 +58,7 @@
 							  </thead>
 						  </table>
 						  <button type="button" id="addDiscountingRule" class="btn btn-secondary">Add item to list</button>
+						  <button type="button" id="close" class="btn btn-secondary">Close</button>
 					</div>		
 					</td>
 				</tr>
@@ -70,17 +73,20 @@
 		<script th:inline="javascript">
 			$(document).ready(function() {
 			var formData = [[${item}]];
-			var discountingRuleData = [[${item.pricingParameterSet.pricingRules}]];
+			var discountingRuleData = [[${item.pricingRules}]];
 			var list = 	[[${discountingRules}]];
 			
-			if ( !discountingRuleData == null){
-			
+			if ( discountingRuleData != null){
 				$('#DiscountingRuleGrid').bootstrapTable({
 					  data: discountingRuleData,
 					  pagination: true
 				});
 
 			}
+			
+			$('#close').click(function(){
+				$("#newDiscountingRuleDiv").hide();
+			})
 			
 			$('#newDiscountingRule').click(function(){
 				
@@ -92,7 +98,8 @@
 				});
 			});
 			
-			$('#addDiscountingRule').click(function(){
+			$('#addDiscountingRule').click(function(event){
+				event.preventDefault();
 				if (formData.mongoId == null){
 					alert("First please save the main data and after can be saved the discountingRule!");
 				} else {
@@ -100,14 +107,36 @@
 					var param = $('#newDiscountingRuleGrid').bootstrapTable('getSelections');
 					
 					$.ajax({
-						  type: "PUT",
-						  url: '/pricingParameterSetDiscountingRules'+'?mongoId='+formData.mongoId,
+						  type: "POST",
+						  url: '/pricingParameterSetDiscountingRules'+'?mongoId='+formData.mongoId+"",
 						  data: JSON.stringify(param),
 						  dataType: 'json',
 						  contentType: "application/json",
 						  success: function(result){
-							  discountingRuleData = result.gridView;
-							  list = result.chosenView;
+							  	$('#DiscountingRuleGrid').bootstrapTable('load',result.storedDiscounts);
+							  	$('#newDiscountingRuleGrid').bootstrapTable('load',result.availableDiscounts);
+							
+						  }
+						});	
+				}
+				
+			});
+			$('#removeDiscountingRule').click(function(event){
+				event.preventDefault();
+				if (formData.mongoId == null){
+					alert("First please save the main data and after can be saved the discountingRule!");
+				} else {
+					var param = $('#DiscountingRuleGrid').bootstrapTable('getSelections');
+					
+					$.ajax({
+						  type: "DELETE",
+						  url: '/pricingParameterSetDiscountingRules'+'?mongoId='+formData.mongoId+"",
+						  data: JSON.stringify(param),
+						  dataType: 'json',
+						  contentType: "application/json",
+						  success: function(result){
+							  $('#DiscountingRuleGrid').bootstrapTable('load',result.storedDiscounts);
+							  $('#newDiscountingRuleGrid').bootstrapTable('load',result.availableDiscounts);
 						  }
 						});	
 				}

@@ -45,10 +45,7 @@
 		$(document).ready(function() {
 			
 			var data = [[${tableItems}]];
-			
-			console.log("log data");
-			console.log(data);
-			
+						
 			$('#table').bootstrapTable({
 			  data: data,
 			  pagination: true
@@ -61,10 +58,7 @@
 						success: function(result){
 						$("#main").html(result);
 
-			 	}});		
-				
-				console.log(url);
-				
+			 	}});			
 			});
 			
 			
@@ -79,8 +73,6 @@
 
 			 	}});		
 				}
-				
-				console.log(param);
 			});
 			
 			$('#delete').click(function(){

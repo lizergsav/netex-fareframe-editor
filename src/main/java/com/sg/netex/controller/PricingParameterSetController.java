@@ -24,7 +24,6 @@ import com.sg.netex.dto.DiscountingRuleDTO;
 import com.sg.netex.dto.PricingParameterSetDTO;
 import com.sg.netex.model.ButtonEvents;
 import com.sg.netex.model.GenericTable;
-import com.sg.netex.model.PricingParameterSetResult;
 import com.sg.netex.repository.DiscountingRuleRepository;
 import com.sg.netex.repository.PricingParameterSetRepository;
 
@@ -130,25 +129,6 @@ public class PricingParameterSetController {
 		
 		return "index";
     }
-	
-	@RequestMapping(value = "/pricingParameterSetDiscountingRules", method = RequestMethod.PUT)
-    public PricingParameterSetResult savePricingParameterSetDiscountingRules(@RequestParam(required = true) String mongoId,@RequestBody(required = true) List<DiscountingRule> discountingRule, BindingResult errors, Model model) {
-		
-		Optional<PricingParameterSetDTO> pricingParameterSet;
-		pricingParameterSet = pricingParameterSetRepo.findById(mongoId);
-
-       	pricingParameterSet.get().setPricingRules(discountingRule);
-    
-        pricingParameterSetRepo.save(pricingParameterSet.get());
-    	
-        PricingParameterSetResult result = new PricingParameterSetResult();
-        result.setGridView(pricingParameterSet.get().getPricingRules());
-        result.setChosenView(getAvailableDiscountingRules(pricingParameterSet.get().getPricingRules()));
-        result.setResult("OK");
-        result.setStatus(HttpStatus.OK);
-        
-		return result;
-    }
 
 	@RequestMapping(value = "/pricingParameterSet", method = RequestMethod.DELETE)
     public String deletePricingParameterSet(Model model,@RequestParam(required=true) String mongoId) {
@@ -162,14 +142,21 @@ public class PricingParameterSetController {
 		return "index";
     }
 	
-	private List<DiscountingRule> getAvailableDiscountingRules(List<DiscountingRule> pricingRules){
+	public List<DiscountingRule> getAvailableDiscountingRules(List<DiscountingRule> pricingRules){
 		List<DiscountingRule> result = new ArrayList<>();
+		boolean contains = false;
 		for (DiscountingRuleDTO rules: discountingRuleRepo.findAll()) {
-	    	if ( !pricingRules.contains(rules.getDiscountingRule()))
-	    		result.add(rules.getDiscountingRule());
+			contains = false;
+			for (DiscountingRule price: pricingRules) {
+				if (price.getId().trim().equals(rules.getDiscountingRule().getId().trim())) {
+					contains = true;
+					break;
+				}
+			}
+			if (!contains)
+				result.add(rules.getDiscountingRule());
+			
 	    }
-		
 		return result;
 	}
-	
 }
